@@ -8,6 +8,8 @@ services:
         environment: 
         - 'MYSQL_ROOT_PASSWORD=12345'
         - 'MYSQL_DATABASE=casostpi'
+        volume:
+        - 'db:/var/lib/mysql'
         ports:
         - '3306:3306'
     payaraserver: 
