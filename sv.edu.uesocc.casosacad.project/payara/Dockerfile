@@ -16,7 +16,7 @@ RUN /opt/payara41/bin/asadmin restart-domain && \
 /opt/payara41/bin/asadmin create-jdbc-connection-pool --datasourceclassname=com.mysql.jdbc.jdbc2.optional.MysqlDataSource --restype=javax.sql.DataSource --property='user=root:password=12345:url="jdbc:mysql://172.17.0.2:3306/casostpi":portNumber=3306:dataBaseName=casostpi:driverClass=com.mysql.jdbc.Driver:serverName=localhost' pool_casostpi --user admin --passwordfile /psw.txt && \
 /opt/payara41/bin/asadmin create-jdbc-resource --connectionpoolid pool_casostpi jndi_casostpi --user admin --passwordfile /psw.txt
 
-ADD /CasosAcadUesTPIApp-ear-1.0-SNAPSHOT.ear /opt/payara41/glassfish/domains/domain1/autodeploy/CasosAcadUesTPIApp-ear-1.0-SNAPSHOT.ear
+#ADD /CasosAcadUesTPIApp-ear-1.0-SNAPSHOT.ear /opt/payara41/glassfish/domains/domain1/autodeploy/CasosAcadUesTPIApp-ear-1.0-SNAPSHOT.ear
 
 
 
