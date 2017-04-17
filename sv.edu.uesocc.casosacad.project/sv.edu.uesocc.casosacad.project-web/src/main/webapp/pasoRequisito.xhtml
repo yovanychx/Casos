@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Paso Requisito</title>
+    </h:head>
+    <h:body>
+        <f:view>
+
+
+            <h:form>
+                <h1><h:outputText value="List"/></h1>
+                <p:dataTable value="#{mbPasoRequisito.ldm}" var="item"
+                             class="tabla"
+                                 lazy="true"
+                                 paginator="true" 
+                                 rows="12" 
+                                 selectionMode="single"
+                                 emptyMessage="Aún no se han agregado requisitos."
+                                 paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 widgetVar="dataTable">
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdPasoRequisito"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPasoRequisito}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Indice"/>
+                        </f:facet>
+                        <h:outputText value="#{item.indice}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdPaso"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idPaso.descripcion}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="IdRequisito"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idRequisito.nombre}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

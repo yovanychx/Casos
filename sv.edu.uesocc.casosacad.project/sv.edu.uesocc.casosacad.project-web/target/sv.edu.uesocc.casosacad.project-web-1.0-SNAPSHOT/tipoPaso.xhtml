@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:btn="http://xmlns.jcp.org/jsf/composite/ezcomp">
+
+    <ui:composition template="templates/main.xhtml">
+
+
+        <ui:define name="content">
+
+            <f:view>   
+                <h:form id="frmData">
+
+                    <p:dataTable value="#{mbTipoPaso.ldm}"
+                                 class="tabla"
+                                 lazy="true"
+                                 var="item"
+                                 paginator="true" 
+                                 rows="12" 
+                                 selectionMode="single"
+                                 selection="#{mbTipoPaso.selectedTipoPaso}"
+                                 emptyMessage="Aún no se han agregado tipo Pasos."
+                                 paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 widgetVar="dataTable"
+                                 >
+
+
+                        <p:ajax update=":dlgEdit" event="rowSelect" listener="#{mbTipoPaso.changeSelected}" oncomplete="PF('dlgEdit').show()"/>
+
+                        <f:facet name="header">
+
+                            <p:outputPanel>
+                                <p:commandButton value="NUEVO" action="#{mbTipoPaso.nuevo()}">
+                                    <p:ajax process="@this" update=":frmEdit :frmEdit:pnlEdit" oncomplete="PF('dlgEdit').show()"/>
+                                </p:commandButton>
+                               
+                            </p:outputPanel>
+
+                        </f:facet> 
+                        <p:column filterBy="#{item.idTipoPaso}" headerText="ID" sortBy="#{item.idTipoPaso}">
+
+                            <h:outputText value="#{item.idTipoPaso}"/>
+
+                        </p:column>
+
+                        <p:column filterBy="#{item.nombre}" headerText="NOMBRE" sortBy="#{item.nombre}">
+
+                            <h:outputText value="#{item.nombre}"/>
+
+                        </p:column>
+
+                        <p:column filterBy="#{item.descripcion}" headerText="DESCRIPCION" sortBy="#{item.descripcion}">
+
+                            <h:outputText value="#{item.descripcion}"/>
+
+                        </p:column>
+                         <p:column filterBy="#{item.activo}" headerText="ESTADO">
+                            <f:facet name="filter">
+                                <p:selectOneButton id="customButton" onchange="PF('dataTable').filter()"> 
+                                    <f:selectItem itemLabel="TODO" itemValue="#{null}" />
+                                    <f:selectItem itemLabel="Activo" itemValue="1" />
+                                    <f:selectItem itemLabel="Inactivo" itemValue="0" /> 
+                                </p:selectOneButton>
+                            </f:facet>       
+                            <h:outputText value="#{item.activo?'ACTIVO':'INACTIVO'}"/>
+                            
+                        </p:column>
+
+                    </p:dataTable>
+
+
+                </h:form>
+            </f:view>
+
+
+
+            <f:view>
+                <p:dialog widgetVar="dlgEdit" id="dlgEdit" header="Panel de Edición" closable="true" closeOnEscape="true" draggable="false" dynamic="true" footer="Todos los campos son requeridos" maximizable="false" minimizable="false" resizable="false" >    
+                    <h:form id="frmEdit" style="min-width: 350px;">
+
+
+
+                        <p:panelGrid id="pnlEdit" columns="2" rendered="#{mbTipoPaso.showDetail}">
+                            <p:outputLabel value="Nombre:" for="nombre" />
+                            <p:inputText id="nombre" value="#{mbTipoPaso.selectedTipoPaso.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                            <p:outputLabel value="Descripcion:" for="descripcion" />
+                            <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{mbTipoPaso.selectedTipoPaso.descripcion}" title="Descripcion" required="true" requiredMessage="The descripcion field is required."/>
+                            <p:outputLabel value="ESTADO:" for="activo" />
+                            <p:selectBooleanButton id="activo" value="#{mbTipoPaso.selectedTipoPaso.activo}" offLabel="INACTIVO" onLabel="ACTIVO"/>
+                        </p:panelGrid>
+                        <btn:pnlBtn id="pnlBtn" name="Tipo Paso" bean="#{mbTipoPaso}"/>
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                    </h:form>
+                </p:dialog>
+            </f:view>
+
+
+        </ui:define>
+
+
+    </ui:composition>
+
+</html>
+

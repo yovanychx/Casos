@@ -1,0 +1,117 @@
+
+/* 
+    Created on : 03-15-2017, 11:49:58 AM
+    Author     : wxlter97
+*/
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+h1{
+    color: #000000;
+    
+}
+.logoUES{
+ margin-left: 40%;
+ margin-right: 25%;
+ margin-top: 8%; 
+ box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+}
+ 
+.cerrar{
+    position: absolute; top: 7px; right: 7px;
+}
+
+body {
+
+    background-color: #C1C3D1;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;  
+}
+
+
+
+#main-header {
+    background: #333;
+    color: white;
+    height: 80px;
+    width: 100%;
+    left: 0;
+    top: 0;
+   
+}   
+#main-header a {
+    color: white;
+}
+    
+    
+/*
+ * Logo
+ */
+#logo-header {
+    float: left;
+    padding: 15px 0 0 20px;
+    text-decoration: none;
+}
+    #logo-header:hover {
+        color: #ff0000;
+    }
+    
+    #logo-header .site-name {
+        display: block;
+        font-weight: 700;
+        font-size: 1.2em;
+    }
+    
+    #logo-header .site-desc {
+        display: block;
+        font-weight: 300;
+        font-size: 0.8em;
+        color: #999;
+    }
+    
+
+/*
+ * Navegación
+ */
+nav {
+    float: right;
+}
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    padding-right: 20px;
+}
+    
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+}
+            
+nav ul li a {
+    display: block;
+    padding: 0 10px;
+    text-decoration: none;
+}
+            
+nav ul li a:hover {
+    background: #ff0000;
+}
+
+footer{
+	
+	bottom: 0;
+}
+
+
+.tabla{
+    position: relative;
+    
+}
+
+.frmData{
+    height: 300px;
+    position: relative;
+}

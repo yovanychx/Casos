@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:btn="http://xmlns.jcp.org/jsf/composite/ezcomp">
+
+    <ui:composition template="templates/main.xhtml">
+        <ui:define name="content">
+            <f:view>   
+                <h:form id="frmData">
+                    <p:dataTable value="#{mbPaso.ldm}"
+                                 class="tabla"
+                                 lazy="true"
+                                 var="item"
+                                 paginator="true" 
+                                 rows="12" 
+                                 selectionMode="single"
+                                 selection="#{mbPaso.selectedPaso}"
+                                 emptyMessage="Aún no se han agregado pasos."
+                                 paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 widgetVar="dataTable"
+                                 >
+                        <p:ajax update=":dlgEdit" event="rowSelect" listener="#{mbPaso.changeSelected}" oncomplete="PF('dlgEdit').show()"/>
+                        <f:facet name="header">
+                            <p:outputPanel>
+                                <p:commandButton value="NUEVO" action="#{mbPaso.nuevo()}">
+                                    <p:ajax process="@this" update=":frmEdit :frmEdit:pnlEdit" oncomplete="PF('dlgEdit').show()"/>
+                                </p:commandButton>
+                            </p:outputPanel>
+                        </f:facet> 
+                        <p:column filterBy="#{item.idPaso}" headerText="ID" sortBy="#{item.idPaso}">
+                            <h:outputText value="#{item.idPaso}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.descripcion}" headerText="DESCRIPCION" sortBy="#{item.descripcion}">
+                            <h:outputText value="#{item.descripcion}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.descripcion}" headerText="TIEMPO" sortBy="#{item.tiempo}">
+                            <h:outputText value="#{item.tiempo}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.idTipoPaso.idTipoPaso}" headerText="TIPO PASO" sortBy="#{item.idTipoPaso}">
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('dataTable').filter()" converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItem value="#{null}" itemLabel="Seleccione uno..."/>
+                                    <f:selectItems value="#{mbTipoPaso.findAll()}" 
+                                                   var="id" 
+                                                   itemLabel="#{id.nombre}" 
+                                                   itemValue="#{id}"
+                                                   itemDescription="#{id.descripcion}"/>
+
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipoPaso.nombre}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </f:view>
+            <f:view>
+                <p:dialog widgetVar="dlgEdit" id="dlgEdit" header="Panel de Edición" closable="true" closeOnEscape="true" draggable="false" dynamic="true" footer="Todos los campos son requeridos" maximizable="false" minimizable="false" resizable="false" >    
+                    <h:form id="frmEdit" style="min-width: 350px;">
+                        <p:panelGrid id="pnlEdit" columns="2" rendered="#{mbPaso.showDetail}">
+                            <p:outputLabel value="Descripcion:" for="descripcion" />
+                            <p:inputText id="descripcion" value="#{mbPaso.selectedPaso.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                            <p:outputLabel value="Tiempo:" for="tiempo" />
+                            <p:inputTextarea rows="4" cols="30" id="tiempo" value="#{mbPaso.selectedPaso.tiempo}" title="Tiempo" required="true" requiredMessage="The Descripcion field is required."/>
+                            <p:outputLabel value="Tipo Paso:" for="idTipoPaso" />
+                            <p:selectOneMenu id="idTipoPaso" value="#{mbPaso.selectedPaso.idTipoPaso}" effect="fold" converter="omnifaces.SelectItemsConverter">
+                                <f:selectItems  value="#{mbTipoPaso.findAll()}" var="id" itemLabel="#{id.descripcion}" itemValue="#{id}"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                        <btn:pnlBtn id="pnlBtn" name="Paso" bean="#{mbPaso}"/>
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                    </h:form>
+                </p:dialog>
+            </f:view>
+        </ui:define>
+    </ui:composition>
+
+</html>
+

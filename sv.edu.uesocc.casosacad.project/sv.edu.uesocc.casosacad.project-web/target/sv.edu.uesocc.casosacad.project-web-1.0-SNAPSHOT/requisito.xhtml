@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:btn="http://xmlns.jcp.org/jsf/composite/ezcomp">
+
+    <ui:composition template="templates/main.xhtml">
+
+
+        <ui:define name="content">
+
+            <f:view>   
+                <h:form id="frmData">
+
+                    <p:dataTable value="#{mbRequisito.ldm}"
+                                 class="tabla"
+                                 lazy="true"
+                                 var="item"
+                                 paginator="true" 
+                                 rows="12" 
+                                 selectionMode="single"
+                                 selection="#{mbRequisito.selectedRequisito}"
+                                 emptyMessage="Aún no se han agregado requisitos."
+                                 paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                 widgetVar="dataTable"
+                                 >
+
+
+                        <p:ajax update=":dlgEdit" event="rowSelect" listener="#{mbRequisito.changeSelected}" oncomplete="PF('dlgEdit').show()"/>
+
+                        <f:facet name="header">
+
+                            <p:outputPanel>
+                                <p:commandButton value="NUEVO" action="#{mbRequisito.nuevo()}">
+                                    <p:ajax process="@none" update=":frmEdit :frmEdit:pnlEdit" oncomplete="PF('dlgEdit').show()"/>
+                                </p:commandButton>
+                               
+                            </p:outputPanel>
+
+                        </f:facet> 
+                        <p:column filterBy="#{item.idRequisito}" headerText="ID" sortBy="#{item.idRequisito}">
+
+                            <h:outputText value="#{item.idRequisito}"/>
+
+                        </p:column>
+
+                        <p:column filterBy="#{item.nombre}" headerText="NOMBRE" sortBy="#{item.nombre}">
+
+                            <h:outputText value="#{item.nombre}"/>
+
+                        </p:column>
+
+                        <p:column filterBy="#{item.descripcion}" headerText="DESCRIPCION" sortBy="#{item.descripcion}">
+
+                            <h:outputText value="#{item.descripcion}"/>
+
+                        </p:column>
+
+                        <p:column filterBy="#{item.prioridad}" headerText="PRIORIDAD" sortBy="#{item.prioridad}">
+
+                            <h:outputText value="#{item.prioridad}"/>
+
+                        </p:column>
+
+
+                        <p:column filterBy="#{item.idTipoRequisito.idTipoRequisito}" headerText="Tipo REQUISITO">
+
+                            <f:facet name="filter">
+                                <p:selectOneMenu onchange="PF('dataTable').filter()" converter="omnifaces.SelectItemsConverter">
+                                    <f:selectItem value="#{null}" itemLabel="Seleccione uno..."/>
+                                    <f:selectItems value="#{mbTipoRequisito.findAll()}" 
+                                                   var="id" 
+                                                   itemLabel="#{id.nombre}" 
+                                                   itemValue="#{id}"
+                                                   itemDescription="#{id.observaciones}"/>
+
+                                </p:selectOneMenu>
+                            </f:facet>
+                            <h:outputText value="#{item.idTipoRequisito.nombre}"/>
+
+                        </p:column>
+
+
+                    </p:dataTable>
+
+
+                </h:form>
+            </f:view>
+
+
+
+            
+                <p:dialog widgetVar="dlgEdit" id="dlgEdit" header="Panel de Edición" closable="true" closeOnEscape="true" draggable="false" dynamic="true" footer="Todos los campos son requeridos" maximizable="false" minimizable="true" resizable="false" >    
+                    <h:form id="frmEdit" style="min-width: 350px;">
+
+
+
+                        <p:panelGrid id="pnlEdit" columns="2" rendered="#{mbRequisito.showDetail}">
+                            <p:outputLabel value="Nombre:" for="nombre" />
+                            <p:inputText id="nombre" value="#{mbRequisito.selectedRequisito.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
+                            <p:outputLabel value="Descripcion:" for="descripcion" />
+                            <p:inputTextarea rows="4" cols="30" id="descripcion" value="#{mbRequisito.selectedRequisito.descripcion}" title="Descripcion" required="true" requiredMessage="The Descripcion field is required."/>
+                            <p:outputLabel value="Prioridad:" for="prioridad" />
+                            <p:inputText id="prioridad" value="#{mbRequisito.selectedRequisito.prioridad}" title="Prioridad" required="true" requiredMessage="The Prioridad field is required."/>
+                            <p:outputLabel value="Tipo Requisito:" for="idTipoRequisito" />
+                            <p:selectOneMenu id="idTipoRequisito" value="#{mbRequisito.selectedRequisito.idTipoRequisito}" effect="fold" converter="omnifaces.SelectItemsConverter">
+
+                                <f:selectItems  value="#{mbTipoRequisito.findAll()}" var="id" itemLabel="#{id.nombre}" itemValue="#{id}"/>
+                            </p:selectOneMenu>
+
+                        </p:panelGrid>
+                        <btn:pnlBtn id="pnlBtn" name="Requisito" bean="#{mbRequisito}"/>
+                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                    </h:form>
+                </p:dialog>
+           
+
+
+        </ui:define>
+
+
+    </ui:composition>
+
+</html>
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="sv.edu.uesocc.casosacad_sv.edu.uesocc.casosacad.project-ejb_ejb_1.0-SNAPSHOTPU" transaction-type="JTA">
+    <jta-data-source>jndi_casostpi</jta-data-source>
+    <class>sv.edu.uesocc.casosacad.data.library.Caso</class>
+    <class>sv.edu.uesocc.casosacad.data.library.CasoDetalle</class>
+    <class>sv.edu.uesocc.casosacad.data.library.CasoDetalleRequisito</class>
+    <class>sv.edu.uesocc.casosacad.data.library.DbCdra</class>
+    <class>sv.edu.uesocc.casosacad.data.library.Paso</class>
+    <class>sv.edu.uesocc.casosacad.data.library.PasoRequisito</class>
+    <class>sv.edu.uesocc.casosacad.data.library.Proceso</class>
+    <class>sv.edu.uesocc.casosacad.data.library.ProcesoDetalle</class>
+    <class>sv.edu.uesocc.casosacad.data.library.Requisito</class>
+    <class>sv.edu.uesocc.casosacad.data.library.Solicitudes</class>
+    <class>sv.edu.uesocc.casosacad.data.library.TipoPaso</class>
+    <class>sv.edu.uesocc.casosacad.data.library.TipoRequisito</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties/>
+  </persistence-unit>
+</persistence>
