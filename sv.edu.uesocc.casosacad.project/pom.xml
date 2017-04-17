@@ -7,6 +7,7 @@
     <packaging>pom</packaging>
     <name>sv.edu.uesocc.casosacad.project</name>
     <modules>
+        <module>docker.goal</module>
         <module>sv.edu.uesocc.casosacad.project-ejb</module>
         <module>sv.edu.uesocc.casosacad.project-web</module>    
         <module>sv.edu.uesocc.casosacad.project-ear</module>
