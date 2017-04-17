@@ -10,46 +10,46 @@
     </properties>
     <build>
         <plugins>
-        <plugin>
-            <groupId>io.fabric8</groupId>
-            <artifactId>docker-maven-plugin</artifactId>
-            <configuration>
-                <dockerHost>https://35.162.23.125:2376</dockerHost>
-                <certPath>/root/.docker/machine/machines/docker3</certPath>
-                <useColor>true</useColor>
-                <images>
-                    <image>
-                        <build>
-                        </build>
-                        <external>
-                            <type>compose</type>
-                            <basedir>../</basedir>
-                            <composeFile>docker-compose.yml</composeFile>
-                        </external>
-                    </image>
-                </images>
-            </configuration>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <configuration>
+                    <dockerHost>https://35.162.23.125:2376</dockerHost>
+                    <certPath>/root/.docker/machine/machines/docker3</certPath>
+                    <useColor>true</useColor>
+                    <images>
+                        <image>
+                            <build>
+                            </build>
+                            <external>
+                                <type>compose</type>
+                                <basedir>../</basedir>
+                                <composeFile>docker-compose.yml</composeFile>
+                            </external>
+                        </image>
+                    </images>
+                </configuration>
                 <executions>
-              <execution>
-                <id>build-image</id>
-                <goals>
-                  <goal>stop</goal>
-                  <goal>build</goal>
-                  <goal>stop</goal>
-                </goals>
-                <phase>pre-integration-test</phase>
-              </execution>
-              <execution>
-                <id>run-image</id>
-                <goals>
-                  <goal>stop</goal>
-                  <goal>start</goal>
-                </goals>
-                <phase>pre-integration-test</phase>
-              </execution>
-            </executions>
-        </plugin>
-    </plugins>
+                    <execution>
+                        <id>build-image</id>
+                        <goals>
+                            <goal>stop</goal>
+                            <goal>build</goal>
+                            <goal>stop</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                    </execution>
+                    <execution>
+                        <id>run-image</id>
+                        <goals>
+                            <goal>stop</goal>
+                            <goal>start</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
     <dependencies>
         <dependency>
