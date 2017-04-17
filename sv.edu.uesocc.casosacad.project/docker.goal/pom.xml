@@ -42,7 +42,8 @@
               <execution>
                 <id>run-image</id>
                 <goals>
-                  <goal>restart</goal>
+                  <goal>stop</goal>
+                  <goal>start</goal>
                 </goals>
                 <phase>pre-integration-test</phase>
               </execution>
