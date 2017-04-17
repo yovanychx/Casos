@@ -33,6 +33,7 @@
               <execution>
                 <id>build-image</id>
                 <goals>
+                  <goal>stop</goal>
                   <goal>build</goal>
                   <goal>stop</goal>
                 </goals>
