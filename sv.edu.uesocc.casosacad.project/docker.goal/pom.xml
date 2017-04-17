@@ -14,6 +14,9 @@
             <groupId>io.fabric8</groupId>
             <artifactId>docker-maven-plugin</artifactId>
             <configuration>
+                <dockerHost>https://35.162.23.125:2376</dockerHost>
+                <certPath>/root/.docker/machine/machines/docker3</certPath>
+                <useColor>true</useColor>
                 <images>
                     <image>
                         <build>
@@ -51,7 +54,7 @@
             <groupId>sv.edu.uesocc.casosacad</groupId>
             <artifactId>sv.edu.uesocc.casosacad.project-ear</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <type>war</type>
+            <type>ear</type>
         </dependency>
     </dependencies>
     
