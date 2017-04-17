@@ -5,7 +5,6 @@ ENV MYSQL_DATABASE=casostpi
 
 ADD /casostpi.sql /docker-entrypoint-initdb.d/casostpi.sql
 
-VOLUME /var/lib/mysql
 EXPOSE 3306
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["mysqld"]
