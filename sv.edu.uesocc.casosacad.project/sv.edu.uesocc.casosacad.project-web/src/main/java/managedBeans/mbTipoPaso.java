@@ -34,10 +34,23 @@ public class mbTipoPaso implements Serializable {
     private LazyDataModel<TipoPaso> ldm;
     private TipoPaso c = new TipoPaso();
     private TipoPaso selectedTipoPaso;
-    private String mensaje;
     private boolean showDetail = false;
     private boolean btnAdd = false;
     private boolean btnEdit = false;
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    public void saveMessage() {
+        FacesContext context = FacesContext.getCurrentInstance();         
+        context.addMessage(null, new FacesMessage(message) );
+    }
     
    
 
@@ -148,13 +161,24 @@ public class mbTipoPaso implements Serializable {
     }
 
     public void create() {
-        this.getFl().create(this.getSelectedTipoPaso());
-        selectedTipoPaso = new TipoPaso();
-
+        try {
+            this.getFl().create(this.getSelectedTipoPaso());
+            setMessage("Registro guardado con éxito.");
+            saveMessage();
+            selectedTipoPaso = new TipoPaso();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
     public void remove() {
-        this.getFl().remove(this.getSelectedTipoPaso());
+        try {
+            this.getFl().remove(this.getSelectedTipoPaso());
+            setMessage("Registro eliminado con éxito.");
+            saveMessage();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }        
     }
 
     public void edit(TipoPaso t) {
@@ -162,8 +186,14 @@ public class mbTipoPaso implements Serializable {
     }
 
     public void edit() {
-        this.getFl().edit(this.getSelectedTipoPaso());
-
+        
+        try {
+            this.getFl().edit(this.getSelectedTipoPaso());
+            setMessage("Registro modificado con éxito.");
+            saveMessage();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        } 
     }
 
     public void empty() {
@@ -231,18 +261,4 @@ public class mbTipoPaso implements Serializable {
     public void setBtnEdit(boolean btnEdit) {
         this.btnEdit = btnEdit;
     }
-
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
-
-    public void sendMessage() {
-        FacesContext context = FacesContext.getCurrentInstance();         
-        context.addMessage(null, new FacesMessage(this.getMensaje()) );
-}
 }

@@ -15,13 +15,13 @@
     <cc:implementation>
         <h:panelGrid id="pnlBtn" columns="3" rendered="#{cc.attrs.bean.showDetail}">
             <p:commandButton value="Nuevo #{cc.attrs.name}" rendered="#{cc.attrs.bean.btnAdd}">
-                <p:ajax process=":frmEdit" update=":frmData :frmEdit" listener="#{cc.attrs.bean.create()}" oncomplete="#{cc.attrs.bean.sendMessage()}; PF('dlgEdit').hide()"/>
+                <p:ajax process=":frmEdit" update=":frmData :frmEdit" listener="#{cc.attrs.bean.create()}" oncomplete="PF('dlgEdit').hide()"/>
             </p:commandButton>
             <p:commandButton value="Editar" rendered="#{cc.attrs.bean.btnEdit}">
-                <p:ajax process=":frmEdit" update=":frmData :frmEdit" listener="#{cc.attrs.bean.edit()}"/>
+                <p:ajax process=":frmEdit" update=":frmData :frmEdit" listener="#{cc.attrs.bean.edit()}" oncomplete="PF('dlgEdit').hide()"/>
             </p:commandButton>
             <p:commandButton value="Eliminar" rendered="#{cc.attrs.bean.btnEdit}">
-                <p:ajax process=":frmEdit" update=":frmData :frmEdit" listener="#{cc.attrs.bean.remove()}"/>
+                <p:ajax process=":frmEdit" update=":frmData :frmEdit" listener="#{cc.attrs.bean.remove()}" oncomplete="PF('dlgEdit').hide()"/>
             </p:commandButton>
         </h:panelGrid>
     </cc:implementation>

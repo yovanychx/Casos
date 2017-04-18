@@ -11,6 +11,7 @@
         <ui:define name="content">
             <f:view>   
                 <h:form id="frmData">
+                    <p:growl id="growl" showDetail="true" sticky="false"/>
                     <p:dataTable value="#{mbPaso.ldm}"
                                  class="tabla"
                                  lazy="true"
@@ -71,7 +72,7 @@
                             </p:selectOneMenu>
                         </p:panelGrid>
                         <btn:pnlBtn id="pnlBtn" name="Paso" bean="#{mbPaso}"/>
-                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                        
                     </h:form>
                 </p:dialog>
             </f:view>

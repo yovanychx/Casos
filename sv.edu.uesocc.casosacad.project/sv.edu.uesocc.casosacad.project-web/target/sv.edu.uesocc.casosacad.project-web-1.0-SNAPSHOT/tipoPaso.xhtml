@@ -14,7 +14,7 @@
 
             <f:view>   
                 <h:form id="frmData">
-
+                    <p:growl id="growl" showDetail="true" sticky="false"/>
                     <p:dataTable value="#{mbTipoPaso.ldm}"
                                  class="tabla"
                                  lazy="true"
@@ -27,17 +27,13 @@
                                  paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                  widgetVar="dataTable"
                                  >
-
-
                         <p:ajax update=":dlgEdit" event="rowSelect" listener="#{mbTipoPaso.changeSelected}" oncomplete="PF('dlgEdit').show()"/>
-
                         <f:facet name="header">
-
                             <p:outputPanel>
-                                <p:commandButton value="NUEVO" action="#{mbTipoPaso.nuevo()}">
-                                    <p:ajax process="@this" update=":frmEdit :frmEdit:pnlEdit" oncomplete="PF('dlgEdit').show()"/>
+                                <p:commandButton value="NUEVO">
+                                    <p:ajax update=":frmEdit :frmEdit:pnlEdit" oncomplete="PF('dlgEdit').show()" listener="#{mbTipoPaso.nuevo()}"/>
                                 </p:commandButton>
-                               
+                              
                             </p:outputPanel>
 
                         </f:facet> 
@@ -93,7 +89,7 @@
                             <p:selectBooleanButton id="activo" value="#{mbTipoPaso.selectedTipoPaso.activo}" offLabel="INACTIVO" onLabel="ACTIVO"/>
                         </p:panelGrid>
                         <btn:pnlBtn id="pnlBtn" name="Tipo Paso" bean="#{mbTipoPaso}"/>
-                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                        
                     </h:form>
                 </p:dialog>
             </f:view>

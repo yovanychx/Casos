@@ -9,9 +9,8 @@
     </h:head>
     <h:body>
         <f:view>
-
-
             <h:form>
+                <p:growl id="growl" showDetail="true" sticky="false"/>
                 <h1><h:outputText value="List"/></h1>
                 <p:dataTable value="#{mbPasoRequisito.ldm}" var="item"
                              class="tabla"

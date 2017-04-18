@@ -36,11 +36,23 @@ public class mbPaso implements Serializable {
     private LazyDataModel<Paso> ldm;
     private Paso c = new Paso();
     private Paso selectedPaso;
-    private String mensaje;
     private boolean showDetail = false;
     private boolean btnAdd = false;
     private boolean btnEdit = false;
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
     
+    public void saveMessage() {
+        FacesContext context = FacesContext.getCurrentInstance();         
+        context.addMessage(null, new FacesMessage(message) );
+    }
    
 
     @PostConstruct
@@ -160,13 +172,24 @@ public class mbPaso implements Serializable {
     }
 
     public void create() {
-        this.getFl().create(this.getSelectedPaso());
-        selectedPaso = new Paso();
-
+        try {
+            this.getFl().create(this.getSelectedPaso());
+            selectedPaso = new Paso();
+            setMessage("Registro guardado con éxito.");
+            saveMessage();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
     public void remove() {
-        this.getFl().remove(this.getSelectedPaso());
+        try {
+            this.getFl().remove(this.getSelectedPaso());
+            setMessage("Registro eliminado con éxito.");
+            saveMessage();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }        
     }
 
     public void edit(Paso t) {
@@ -174,8 +197,13 @@ public class mbPaso implements Serializable {
     }
 
     public void edit() {
-        this.getFl().edit(this.getSelectedPaso());
-
+        try {
+            this.getFl().edit(this.getSelectedPaso());
+            setMessage("Registro modificado con éxito.");
+            saveMessage();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }
     }
 
     public void empty() {
@@ -245,18 +273,4 @@ public class mbPaso implements Serializable {
     public void setBtnEdit(boolean btnEdit) {
         this.btnEdit = btnEdit;
     }
-
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
-
-    public void sendMessage() {
-        FacesContext context = FacesContext.getCurrentInstance();         
-        context.addMessage(null, new FacesMessage(this.getMensaje()) );
-}
 }

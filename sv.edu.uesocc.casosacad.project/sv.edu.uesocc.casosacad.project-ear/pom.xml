@@ -39,6 +39,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <directory>../../docker/payara/target</directory>
     </build>
     <dependencies>
         <dependency>

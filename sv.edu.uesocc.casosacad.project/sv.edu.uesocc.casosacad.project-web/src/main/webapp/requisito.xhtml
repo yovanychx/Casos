@@ -14,7 +14,7 @@
 
             <f:view>   
                 <h:form id="frmData">
-
+                    <p:growl id="growl" showDetail="true" sticky="false"/>
                     <p:dataTable value="#{mbRequisito.ldm}"
                                  class="tabla"
                                  lazy="true"
@@ -88,16 +88,9 @@
 
 
                 </h:form>
-            </f:view>
-
-
-
-            
-                <p:dialog widgetVar="dlgEdit" id="dlgEdit" header="Panel de Edición" closable="true" closeOnEscape="true" draggable="false" dynamic="true" footer="Todos los campos son requeridos" maximizable="false" minimizable="true" resizable="false" >    
+            </f:view>            
+                <p:dialog widgetVar="dlgEdit" id="dlgEdit" header="Panel de Edición" closable="true" closeOnEscape="true" draggable="false" dynamic="true" footer="Todos los campos son requeridos" maximizable="false" minimizable="true" resizable="true" >    
                     <h:form id="frmEdit" style="min-width: 350px;">
-
-
-
                         <p:panelGrid id="pnlEdit" columns="2" rendered="#{mbRequisito.showDetail}">
                             <p:outputLabel value="Nombre:" for="nombre" />
                             <p:inputText id="nombre" value="#{mbRequisito.selectedRequisito.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
@@ -113,7 +106,7 @@
 
                         </p:panelGrid>
                         <btn:pnlBtn id="pnlBtn" name="Requisito" bean="#{mbRequisito}"/>
-                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                        
                     </h:form>
                 </p:dialog>
            

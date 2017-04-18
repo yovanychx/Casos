@@ -36,11 +36,23 @@ public class mbRequisito implements Serializable {
     private LazyDataModel<Requisito> ldm;
     private Requisito c = new Requisito();
     private Requisito selectedRequisito;
-    private String mensaje;
     private boolean showDetail = false;
     private boolean btnAdd = false;
     private boolean btnEdit = false;
+    private String message;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
     
+    public void saveMessage() {
+        FacesContext context = FacesContext.getCurrentInstance();         
+        context.addMessage(null, new FacesMessage(message) );
+    }
    
 
     @PostConstruct
@@ -166,11 +178,24 @@ this.setSelectedRequisito(new Requisito());
     }
 
     public void create() {
-        this.getFl().create(this.getSelectedRequisito());
+        try {
+            this.getFl().create(this.getSelectedRequisito());
+            selectedRequisito= new Requisito();
+            setMessage("Registro guardado con éxito.");
+            saveMessage();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }        
     }
 
     public void remove() {
-        this.getFl().remove(this.getSelectedRequisito());
+        try {
+            this.getFl().remove(this.getSelectedRequisito());
+            setMessage("Registro eliminado con éxito.");
+            saveMessage();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        }         
     }
 
     public void edit(Requisito t) {
@@ -178,8 +203,13 @@ this.setSelectedRequisito(new Requisito());
     }
 
     public void edit() {
-        this.getFl().edit(this.getSelectedRequisito());
-
+        try {
+            this.getFl().edit(this.getSelectedRequisito());
+            setMessage("Registro modificado con éxito.");
+            saveMessage();
+        } catch (Exception e) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, e.getMessage(), e);
+        } 
     }
 
     public void empty() {
@@ -249,18 +279,4 @@ this.setSelectedRequisito(new Requisito());
     public void setBtnEdit(boolean btnEdit) {
         this.btnEdit = btnEdit;
     }
-
-
-    public String getMensaje() {
-        return mensaje;
-    }
-
-    public void setMensaje(String mensaje) {
-        this.mensaje = mensaje;
-    }
-
-    public void sendMessage() {
-        FacesContext context = FacesContext.getCurrentInstance();         
-        context.addMessage(null, new FacesMessage(this.getMensaje()) );
-}
 }

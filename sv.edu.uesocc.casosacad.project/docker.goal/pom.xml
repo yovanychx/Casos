@@ -21,7 +21,7 @@
                         <image>
                             <external>
                                 <type>compose</type>
-                                <basedir>../</basedir>
+                                <basedir>../../docker</basedir>
                                 <composeFile>docker-compose.yml</composeFile>
                             </external>
                         </image>
@@ -29,7 +29,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>stop-images</id>
+                        <id>remove-containers</id>
                         <goals>
                             <goal>stop</goal>
                         </goals>

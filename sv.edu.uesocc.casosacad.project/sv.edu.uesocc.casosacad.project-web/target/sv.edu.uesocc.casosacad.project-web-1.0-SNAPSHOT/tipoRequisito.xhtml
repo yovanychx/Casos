@@ -14,7 +14,7 @@
 
             <f:view>   
                 <h:form id="frmData">
-
+                    <p:growl id="growl" showDetail="true" sticky="false"/>
                     <p:dataTable value="#{mbTipoRequisito.ldm}"
                                  class="tabla"
                                  lazy="true"
@@ -93,7 +93,7 @@
                             <p:selectBooleanButton id="activo" value="#{mbTipoRequisito.selectedTipoRequisito.activo}" offLabel="INACTIVO" onLabel="ACTIVO"/>
                         </p:panelGrid>
                         <btn:pnlBtn id="pnlBtn" name="Tipo Requisito" bean="#{mbTipoRequisito}"/>
-                        <p:growl id="growl" showDetail="true" sticky="false"/>
+                        
                     </h:form>
                 </p:dialog>
             </f:view>
