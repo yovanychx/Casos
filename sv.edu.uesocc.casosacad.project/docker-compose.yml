@@ -9,7 +9,7 @@ services:
         - 'MYSQL_ROOT_PASSWORD=12345'
         - 'MYSQL_DATABASE=casostpi'
         volumes:
-        - ./var/lib/mysql
+        - /var/lib/mysql
         ports:
         - '3306:3306'
     payaraserver: 
